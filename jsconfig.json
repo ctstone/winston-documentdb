@@ -1,0 +1,8 @@
+{
+   "compilerOptions": {
+       "baseUrl": "./",
+       "paths": {
+           "documentdb": ["typings/documentdb"]
+       }
+   }
+}
