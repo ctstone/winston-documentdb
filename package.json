@@ -11,8 +11,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/async": "^2.0.40",
     "@types/winston": "^2.3.0",
     "documentdb": "^1.11.0",
     "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "async": "^2.3.0"
   }
 }

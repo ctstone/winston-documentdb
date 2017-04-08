@@ -13,10 +13,19 @@ export interface DocumentDbOptions {
   collectionName: string;
 
   /** Max simultaneous writes to DocumentDb */
-  concurrency: number;
+  concurrency?: number;
 
   /** Replace any Buffer object in event meta object with a hash of the buffer */
-  hashBuffers: boolean;
+  attachMedia?: boolean;
+
+  /** Collection throughput for created collections */
+  collectionThroughput?: number;
+
+  /** Default time-to-live for created collections (-1 to disable) */
+  defaultTtl?: number;
+
+  /** Partition key to use, if the collection is partitioned */
+  partitionKey?: string;
 }
 
 interface LogEvent {
@@ -45,4 +54,5 @@ export class DocumentDbLogger {
   private _collectionLink: string;
 
   log(level: string, message: string, meta: any, callback: (err: Error, success: boolean) => void): void
+  on(event: string, callback: (event: any) => void);
 }
