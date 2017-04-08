@@ -4,3 +4,7 @@ typings
 tslint.json
 tsconfig.json
 *.tgz
+.eslintrc.json
+jsoncifg.json
+.npmignore
+src/scripts

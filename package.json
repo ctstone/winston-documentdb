@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "",
   "main": "src/winston-documentdb.js",
-  "typings": "typings/winston-documentdb/index.d.ts",
+  "typings": "src/winston-documentdb.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "bump": "npm version patch -m \"Bump to %s ***NO_CI***\" ",
