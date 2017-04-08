@@ -112,10 +112,9 @@ function prepareMeta(logger, obj, mediaFiles) {
 
     if (logger._options.attachMedia) {
       mediaFiles.push(event);
-      return { $media: event.id };
-    } else {
-      return event.media;
     }
+    return { $media: event.id };
+    
   } else if (Array.isArray(obj)) {
     return obj.map(x => prepareMeta(logger, x, mediaFiles));
   } else if (typeof obj == 'object') {
