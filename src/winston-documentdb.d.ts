@@ -28,6 +28,11 @@ export interface DocumentDbOptions {
   partitionKey?: string;
 }
 
+export interface Media {
+  id: string,
+  media: Buffer,
+}
+
 interface LogEvent {
   doc: LogDocument;
   callback(err: Error, success: boolean): void;
