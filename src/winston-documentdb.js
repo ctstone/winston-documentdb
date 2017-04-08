@@ -27,6 +27,8 @@ exports.DocumentDbLogger = function(options) {
   this._collectionLink = `dbs/${this._options.databaseName}/colls/${this._options.collectionName}`;
 };
 
+exports.DocumentDbLogger.prototype.name = 'documentdb';
+
 /**
  * Log an event
  * @param {string} level
@@ -242,3 +244,4 @@ function hash(buf) { // TODO options for algo and encoding
 }
 
 util.inherits(exports.DocumentDbLogger, winston.Transport);
+winston.transports.DocumentDb = exports.DocumentDbLogger;
