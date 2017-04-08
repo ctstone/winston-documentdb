@@ -5,6 +5,6 @@ tslint.json
 tsconfig.json
 *.tgz
 .eslintrc.json
-jsoncifg.json
+jsconfig.json
 .npmignore
 src/scripts
