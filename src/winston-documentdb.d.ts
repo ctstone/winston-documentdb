@@ -48,7 +48,7 @@ interface LogDocument {
 /**
  * DocumentDb Logger for winston
  */
-export class DocumentDbLogger {
+export class DocumentDbLogger extends NodeJS.EventEmitter {
   /** Create new DocumentDbLogger */
   constructor(options?: DocumentDbOptions);
 
