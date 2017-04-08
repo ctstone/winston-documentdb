@@ -20,6 +20,9 @@
     "documentdb": "^1.11.0",
     "typescript": "^2.2.2"
   },
+  "peerDependencies": {
+    "winston": "^2.3.1"
+  },
   "dependencies": {
     "async": "^2.3.0"
   }
