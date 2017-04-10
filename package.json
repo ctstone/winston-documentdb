@@ -1,6 +1,6 @@
 {
   "name": "winston-documentdb",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "",
   "main": "src/winston-documentdb.js",
   "typings": "src/winston-documentdb.d.ts",
