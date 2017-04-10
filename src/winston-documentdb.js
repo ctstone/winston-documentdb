@@ -117,7 +117,7 @@ function prepareMeta(logger, obj, mediaFiles) {
     
   } else if (Array.isArray(obj)) {
     return obj.map(x => prepareMeta(logger, x, mediaFiles));
-  } else if (typeof obj == 'object') {
+  } else if (obj && typeof obj == 'object') {
     const clone = {};
     Object.keys(obj).forEach((x) => clone[x] = prepareMeta(logger, obj[x], mediaFiles));
     return clone;
