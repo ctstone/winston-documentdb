@@ -1,11 +1,7 @@
 import { DocumentClient } from 'documentdb';
 
 /** DocumentDbLogger configuration  */
-export interface DocumentDbOptions {
-
-  /** Configured DocumentDb client */
-  client: DocumentClient;
-
+export interface DocumentDbConfig {
   /** DocumentDb database name (created if it does not exist) */
   databaseName: string;
 
@@ -26,6 +22,11 @@ export interface DocumentDbOptions {
 
   /** Partition key to use, if the collection is partitioned */
   partitionKey?: string;
+}
+
+export interface DocumentDbOptions extends DocumentDbConfig {
+  /** Configured DocumentDb client */
+  client: DocumentClient;
 }
 
 export interface Media {
