@@ -3,7 +3,7 @@ import { DocumentClient } from 'documentdb';
 /** DocumentDbLogger configuration  */
 export interface DocumentDbOptions {
 
-  /** DocumentDb client */
+  /** Configured DocumentDb client */
   client: DocumentClient;
 
   /** DocumentDb database name (created if it does not exist) */
@@ -12,16 +12,16 @@ export interface DocumentDbOptions {
   /** DocumentDb collection name (created if it does not exist) */
   collectionName: string;
 
-  /** Max simultaneous writes to DocumentDb */
+  /** Max simultaneous writes to DocumentDb (default: 1) */
   concurrency?: number;
 
-  /** Replace any Buffer object in event meta object with a hash of the buffer */
+  /** Replace any Buffer object in event meta object with a hash of the buffer (default: true) */
   attachMedia?: boolean;
 
-  /** Collection throughput for created collections */
+  /** Collection throughput for created collections (default: 10000) */
   collectionThroughput?: number;
 
-  /** Default time-to-live for created collections (-1 to disable) */
+  /** Default time-to-live for created collections */
   defaultTtl?: number;
 
   /** Partition key to use, if the collection is partitioned */
@@ -30,7 +30,7 @@ export interface DocumentDbOptions {
 
 export interface Media {
   id: string,
-  media: Buffer,
+  data: Buffer,
 }
 
 interface LogEvent {
@@ -50,7 +50,7 @@ interface LogDocument {
  */
 export class DocumentDbLogger extends NodeJS.EventEmitter {
   /** Create new DocumentDbLogger */
-  constructor(options?: DocumentDbOptions);
+  constructor(options: DocumentDbOptions);
 
   private _options: DocumentDbOptions;
   private _queue: Array<LogEvent>;

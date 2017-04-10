@@ -72,7 +72,7 @@ function writeNext(logger, entry) {
         (next) => logger._client.createDocument(logger._collectionLink, entry.doc, next),
         (doc, headers, next) => {
           async.each(entry.media, (media, next) => {
-            logger._client.createAttachmentAndUploadMedia(doc._self, media.media, next); // TODO media options like contentType
+            logger._client.createAttachmentAndUploadMedia(doc._self, media.data, next); // TODO media options like contentType
           }, next);
         }
       ], next);
@@ -107,7 +107,7 @@ function prepareMeta(logger, obj, mediaFiles) {
   if (obj instanceof Error) {
     return { name: obj.name, message: obj.message, stack: obj.stack };
   } else if (Buffer.isBuffer(obj)) {
-    const event = {id: hash(obj), media:obj}; // dedupe here?
+    const event = {id: hash(obj), data:obj}; // dedupe here?
     logger.emit('media', event);
 
     if (logger._options.attachMedia) {
