@@ -242,5 +242,12 @@ function hash(buf) { // TODO options for algo and encoding
   return crypto.createHash('md5').update(buf).digest('hex');
 }
 
+/**
+ * Register DocumentDb transprot with Winston
+ */
+exports.registerTransport = function() {
+  winston.transports.DocumentDb = exports.DocumentDbLogger;
+}
+
 util.inherits(exports.DocumentDbLogger, winston.Transport);
-winston.transports.DocumentDb = exports.DocumentDbLogger;
+exports.registerTransport();

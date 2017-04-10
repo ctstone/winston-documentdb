@@ -62,3 +62,5 @@ export class DocumentDbLogger extends NodeJS.EventEmitter {
   log(level: string, message: string, meta: any, callback: (err: Error, success: boolean) => void): void
   on(event: string, callback: (event: any) => void);
 }
+
+export function registerTransport();
