@@ -119,8 +119,6 @@ function prepareMeta(logger, obj, mediaFiles, seen) {
 
   if (typeof obj === 'function') {
     return saw(null);
-  } else if (obj && obj.constructor && obj.constructor.name === 'Timeout') {
-    return saw(null);
   } else if (obj instanceof Error) {
     return saw({ name: obj.name, message: obj.message, stack: obj.stack });
   } else if (Buffer.isBuffer(obj)) {
@@ -133,9 +131,13 @@ function prepareMeta(logger, obj, mediaFiles, seen) {
   } else if (Array.isArray(obj)) {
     return saw(obj.map(x => prepareMeta(logger, x, mediaFiles, seen)));
   } else if (obj && typeof obj == 'object') {
-    const clone = {};
-    Object.keys(obj).forEach((x) => clone[x] = prepareMeta(logger, obj[x], mediaFiles, seen));
-    return saw(clone);
+    if (obj.constructor.name === 'Object') {
+      const clone = {};
+      Object.keys(obj).forEach((x) => clone[x] = prepareMeta(logger, obj[x], mediaFiles, seen));
+      return saw(clone);
+    } else {
+      return saw(null);
+    }
   } else {
     return obj;
   }
