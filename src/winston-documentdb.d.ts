@@ -1,4 +1,5 @@
 import { DocumentClient } from 'documentdb';
+import { LoggerInstance } from 'winston';
 
 /** DocumentDbLogger configuration  */
 export interface DocumentDbConfig {
@@ -49,7 +50,7 @@ interface LogDocument {
 /**
  * DocumentDb Logger for winston
  */
-export class DocumentDbLogger extends NodeJS.EventEmitter {
+export class DocumentDbLogger extends NodeJS.EventEmitter, LoggerInstance {
   /** Create new DocumentDbLogger */
   constructor(options: DocumentDbOptions);
 

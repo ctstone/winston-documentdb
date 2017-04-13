@@ -101,26 +101,37 @@ function uniqBy(array, iteratee) {
  * @param {DocumentDbLogger} logger 
  * @param {any} obj 
  * @param {any[]} media
+ * @param {any[]} seen
  * @returns {any} Input object or a cloned object if any properties were changed
  */
-function prepareMeta(logger, obj, mediaFiles) {
+function prepareMeta(logger, obj, mediaFiles, seen) {
+  seen = seen || [];
+  const ref = seen.find(x => x.obj === obj);
+
+  if (ref) {
+    return ref.meta;
+  }
+
+  function saw(meta) {
+    seen.push({obj: obj, meta });
+    return meta;
+  }
+
   if (obj instanceof Error) {
-    return { name: obj.name, message: obj.message, stack: obj.stack };
+    return saw({ name: obj.name, message: obj.message, stack: obj.stack });
   } else if (Buffer.isBuffer(obj)) {
     const event = {id: hash(obj), data:obj}; // dedupe here?
     logger.emit('media', event);
-
     if (logger._options.attachMedia) {
       mediaFiles.push(event);
     }
-    return { $media: event.id };
-    
+    return saw({ $media: event.id });
   } else if (Array.isArray(obj)) {
-    return obj.map(x => prepareMeta(logger, x, mediaFiles));
+    return saw(obj.map(x => prepareMeta(logger, x, mediaFiles, seen)));
   } else if (obj && typeof obj == 'object') {
     const clone = {};
-    Object.keys(obj).forEach((x) => clone[x] = prepareMeta(logger, obj[x], mediaFiles));
-    return clone;
+    Object.keys(obj).forEach((x) => clone[x] = prepareMeta(logger, obj[x], mediaFiles, seen));
+    return saw(clone);
   } else {
     return obj;
   }
