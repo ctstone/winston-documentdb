@@ -112,12 +112,16 @@ function prepareMeta(logger, obj, mediaFiles, seen) {
     return ref.meta;
   }
 
-  function saw(meta) {
+  function saw(meta) { // probably not needed
     seen.push({obj: obj, meta });
     return meta;
   }
 
-  if (obj instanceof Error) {
+  if (typeof obj === 'function') {
+    return saw(null);
+  } else if (obj && obj.constructor && obj.constructor.name === 'Timeout') {
+    return saw(null);
+  } else if (obj instanceof Error) {
     return saw({ name: obj.name, message: obj.message, stack: obj.stack });
   } else if (Buffer.isBuffer(obj)) {
     const event = {id: hash(obj), data:obj}; // dedupe here?
