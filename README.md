@@ -24,7 +24,7 @@ winston.add(DocumentDbTransport as any, {
   collectionName: 'yourCollection',
 });
 
-winston.info('hello world', {foo:['bar', 123']});
+winston.info('hello world', {foo:['bar', 123]});
 ```
 
 ## JavaScript
@@ -39,7 +39,7 @@ winston.add(winston.DocumentDb, {
   collectionName: 'yourCollection',
 });
 
-winston.info('hello world', {foo:['bar', 123']});
+winston.info('hello world', {foo:['bar', 123]});
 ```
 
 ## Buffer objects inside meta
