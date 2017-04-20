@@ -1,7 +1,7 @@
 {
   "name": "winston-documentdb",
-  "version": "1.0.15",
-  "description": "",
+  "version": "1.1.0",
+  "description": "DocumentDB transport for the winston logging utility",
   "main": "src/winston-documentdb.js",
   "typings": "src/winston-documentdb.d.ts",
   "scripts": {
@@ -12,16 +12,20 @@
     "preversion": "git config user.name CI && git config user.email %npm_package_author_name%"
   },
   "keywords": [],
-  "author": "",
+  "author": "chstone@microsoft.com",
+  "repository": {
+    "url": "https://github.com/ctstone/winston-documentdb",
+    "type": "git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/async": "^2.0.40",
     "@types/winston": "^2.3.0",
-    "documentdb": "^1.11.0",
-    "typescript": "^2.2.2"
+    "documentdb": "^1.11.0"
   },
   "peerDependencies": {
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "documentdb": "^1.11.0"
   },
   "dependencies": {
     "async": "^2.3.0"
