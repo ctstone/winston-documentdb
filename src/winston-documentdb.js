@@ -10,9 +10,9 @@ const HTTP_NOT_FOUND = 404;
 
 /**
  * @class
- * @param {DocumentDbOptions} options
+ * @param {DocumentDbTransportOptions} options
  */
-exports.DocumentDbLogger = function(options) {
+exports.DocumentDbTransport = function(options) {
   winston.Transport.call(this, options);
   this._options = options || { };
   this._options.concurrency = this._options.concurrency || DEFAULT_CONURRENCY;
@@ -27,7 +27,7 @@ exports.DocumentDbLogger = function(options) {
   this._collectionLink = `dbs/${this._options.databaseName}/colls/${this._options.collectionName}`;
 };
 
-exports.DocumentDbLogger.prototype.name = 'documentdb';
+exports.DocumentDbTransport.prototype.name = 'documentdb';
 
 /**
  * Log an event
@@ -36,7 +36,7 @@ exports.DocumentDbLogger.prototype.name = 'documentdb';
  * @param {meta} any
  * @param {Function} callback
  */
-exports.DocumentDbLogger.prototype.log = function(level, message, meta, callback) {
+exports.DocumentDbTransport.prototype.log = function(level, message, meta, callback) {
   const media = [];
   meta = prepareMeta(this, meta, media);
 
@@ -263,8 +263,8 @@ function hash(buf) { // TODO options for algo and encoding
  * Register DocumentDb transprot with Winston
  */
 exports.registerTransport = function() {
-  winston.transports.DocumentDb = exports.DocumentDbLogger;
+  winston.transports.DocumentDb = exports.DocumentDbTransport;
 }
 
-util.inherits(exports.DocumentDbLogger, winston.Transport);
+util.inherits(exports.DocumentDbTransport, winston.Transport);
 exports.registerTransport();

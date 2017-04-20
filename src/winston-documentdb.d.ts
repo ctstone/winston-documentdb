@@ -2,7 +2,7 @@ import { DocumentClient } from 'documentdb';
 import { LoggerInstance } from 'winston';
 
 /** DocumentDbLogger configuration  */
-export interface DocumentDbConfig {
+export interface DocumentDbTransportConfig {
   /** DocumentDb database name (created if it does not exist) */
   databaseName: string;
 
@@ -25,7 +25,7 @@ export interface DocumentDbConfig {
   partitionKey?: string;
 }
 
-export interface DocumentDbOptions extends DocumentDbConfig {
+export interface DocumentDbTransportOptions extends DocumentDbTransportConfig {
   /** Configured DocumentDb client */
   client: DocumentClient;
 }
@@ -50,11 +50,11 @@ interface LogDocument {
 /**
  * DocumentDb Logger for winston
  */
-export class DocumentDbLogger extends NodeJS.EventEmitter, LoggerInstance {
+export class DocumentDbTransport extends NodeJS.EventEmitter, LoggerInstance {
   /** Create new DocumentDbLogger */
-  constructor(options: DocumentDbOptions);
+  constructor(options: DocumentDbTransportOptions);
 
-  private _options: DocumentDbOptions;
+  private _options: DocumentDbTransportOptions;
   private _queue: Array<LogEvent>;
   private _pending: number;
   private _client: DocumentClient;
